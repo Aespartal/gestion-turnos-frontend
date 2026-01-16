@@ -7,7 +7,7 @@ import { CitasService } from '../../services/cita.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './lista-citas.html',
-  styleUrls: ['./lista-citas.css']
+  styleUrls: ['./lista-citas.scss']
 })
 export class ListaCitasComponent implements OnInit {
   citas: any[] = [];
