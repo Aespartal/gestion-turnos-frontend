@@ -1,0 +1,19 @@
+<div class="container mt-4">
+  <h2>Lista de Turnos</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Cliente</th>
+        <th>Servicio</th>
+        <th>Fecha y Hora</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cita of citas">
+        <td>{{ cita.clienteNombre }}</td>
+        <td>{{ cita.servicio }}</td>
+        <td>{{ cita.fechaHora | date:'dd/MM/yyyy HH:mm' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

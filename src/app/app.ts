@@ -1,12 +1,12 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ListaCitasComponent } from "./components/lista-citas/lista-citas";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [ListaCitasComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('site');
+  protected readonly title = signal('gestion-turnos-front');
 }

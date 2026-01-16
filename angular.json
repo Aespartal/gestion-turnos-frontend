@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "site": {
+    "gestion-turnos-front": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -30,6 +30,7 @@
               }
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
             ]
           },
@@ -61,10 +62,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "site:build:production"
+              "buildTarget": "gestion-turnos-front:build:production"
             },
             "development": {
-              "buildTarget": "site:build:development"
+              "buildTarget": "gestion-turnos-front:build:development"
             }
           },
           "defaultConfiguration": "development"
