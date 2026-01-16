@@ -9,11 +9,17 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let cita of citas">
+      @for (cita of citas; track cita.id) {
+      <tr>
         <td>{{ cita.clienteNombre }}</td>
         <td>{{ cita.servicio }}</td>
         <td>{{ cita.fechaHora | date:'dd/MM/yyyy HH:mm' }}</td>
       </tr>
+      } @empty {
+      <tr>
+        <td colspan="3" class="text-center">No hay citas disponibles</td>
+      </tr>
+      }
     </tbody>
   </table>
 
