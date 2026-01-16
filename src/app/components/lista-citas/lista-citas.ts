@@ -15,8 +15,12 @@ export class ListaCitasComponent implements OnInit {
   constructor(private citasService: CitasService) {}
 
   ngOnInit(): void {
-    this.citasService.listarCitas().subscribe(data => {
-      this.citas = data;
-    });
+    this.citasService.listarCitas().subscribe({
+    next: (data) => {
+      console.log("Datos recibidos:", data);
+      this.citas = [...data];
+    },
+  error: (err) => console.error("Error cargando citas:", err)
+});
   }
 }
