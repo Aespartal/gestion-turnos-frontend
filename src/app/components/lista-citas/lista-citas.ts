@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { CitasService, Cita } from '../../services/cita.service';
 
 @Component({
   selector: 'app-lista-citas',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, DatePipe],
   templateUrl: './lista-citas.html',
   styleUrls: ['./lista-citas.scss']
 })
