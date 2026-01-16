@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { CitasService, Cita } from '../../services/cita.service';
 
@@ -12,14 +12,18 @@ import { CitasService, Cita } from '../../services/cita.service';
 export class ListaCitasComponent implements OnInit {
   citas: Cita[] = [];
 
-  constructor(private citasService: CitasService) {}
+  constructor(
+    private citasService: CitasService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.citasService.listarCitas().subscribe({
       next: (data: Cita[]) => {
         console.log('Datos recibidos:', data);
-        this.citas = data;
+        this.citas = [...data];
         console.log('Citas asignadas:', this.citas);
+        this.cdr.detectChanges();
       },
       error: (err) => console.error('Error cargando citas:', err)
     });
