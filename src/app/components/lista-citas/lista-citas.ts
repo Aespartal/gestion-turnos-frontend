@@ -30,15 +30,26 @@ export class ListaCitasComponent implements OnInit {
 
     this.citasService.listarCitas().subscribe({
       next: (data: Cita[]) => {
+        console.log('Citas recibidas:', data);
         this.citas = data;
         this.loading = false;
       },
       error: (err) => {
-        this.error = err.message || 'Error al cargar las citas';
+        console.error('Error completo:', err);
+        this.error = this.getErrorMessage(err);
         this.loading = false;
-        console.error('Error cargando citas:', err);
+      },
+      complete: () => {
+        console.log('Petición completada');
       }
     });
+  }
+
+  private getErrorMessage(err: any): string {
+    if (err.status === 0) {
+      return 'Error de conexión. Verifica que el servidor esté disponible y CORS configurado.';
+    }
+    return err.message || 'Error al cargar las citas';
   }
 
   onCitaCreada(cita: CitaCreate): void {
