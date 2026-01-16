@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { CitasService } from '../../services/cita.service';
 import { Cita, CitaCreate } from '../../models/cita.model';
@@ -12,11 +12,11 @@ import { FormularioCitaComponent } from '../formulario-cita/formulario-cita';
   styleUrls: ['./lista-citas.scss']
 })
 export class ListaCitasComponent implements OnInit {
-  citas: Cita[] = [];
-  loading = false;
-  error: string | null = null;
-  guardando = false;
-  mensajeExito: string | null = null;
+  citas = signal<Cita[]>([]);
+  loading = signal(false);
+  error = signal<string | null>(null);
+  guardando = signal(false);
+  mensajeExito = signal<string | null>(null);
 
   constructor(private citasService: CitasService) {}
 
@@ -25,19 +25,19 @@ export class ListaCitasComponent implements OnInit {
   }
 
   cargarCitas(): void {
-    this.loading = true;
-    this.error = null;
+    this.loading.set(true);
+    this.error.set(null);
 
     this.citasService.listarCitas().subscribe({
       next: (data: Cita[]) => {
         console.log('Citas recibidas:', data);
-        this.citas = data;
-        this.loading = false;
+        this.citas.set(data);
+        this.loading.set(false);
       },
       error: (err) => {
         console.error('Error completo:', err);
-        this.error = this.getErrorMessage(err);
-        this.loading = false;
+        this.error.set(this.getErrorMessage(err));
+        this.loading.set(false);
       },
       complete: () => {
         console.log('Petición completada');
@@ -53,24 +53,24 @@ export class ListaCitasComponent implements OnInit {
   }
 
   onCitaCreada(cita: CitaCreate): void {
-    this.guardando = true;
-    this.error = null;
-    this.mensajeExito = null;
+    this.guardando.set(true);
+    this.error.set(null);
+    this.mensajeExito.set(null);
 
     this.citasService.guardarCita(cita).subscribe({
       next: (nuevaCita: Cita) => {
-        this.citas = [...this.citas, nuevaCita];
-        this.guardando = false;
-        this.mensajeExito = 'Cita creada exitosamente';
+        this.citas.update(citas => [...citas, nuevaCita]);
+        this.guardando.set(false);
+        this.mensajeExito.set('Cita creada exitosamente');
 
         // Limpiar mensaje después de 3 segundos
         setTimeout(() => {
-          this.mensajeExito = null;
+          this.mensajeExito.set(null);
         }, 3000);
       },
       error: (err) => {
-        this.error = err.message || 'Error al crear la cita';
-        this.guardando = false;
+        this.error.set(err.message || 'Error al crear la cita');
+        this.guardando.set(false);
         console.error('Error creando cita:', err);
       }
     });

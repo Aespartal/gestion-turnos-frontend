@@ -1,16 +1,16 @@
 <div class="container mt-5">
   <!-- Mensaje de éxito -->
-  @if (mensajeExito) {
+  @if (mensajeExito()) {
     <div class="alert alert-success alert-dismissible fade show" role="alert">
       <i class="bi bi-check-circle-fill me-2"></i>
-      <strong>{{ mensajeExito }}</strong>
+      <strong>{{ mensajeExito() }}</strong>
     </div>
   }
 
   <!-- Formulario de nueva cita -->
   <app-formulario-cita
     (citaCreada)="onCitaCreada($event)"
-    [class.opacity-50]="guardando">
+    [class.opacity-50]="guardando()">
   </app-formulario-cita>
 
   <!-- Lista de citas -->
@@ -22,7 +22,7 @@
     </div>
     <div class="card-body">
       <!-- Estado de carga -->
-      @if (loading) {
+      @if (loading()) {
         <div class="text-center py-5">
           <div class="spinner-border text-primary" role="status">
             <span class="visually-hidden">Cargando...</span>
@@ -32,11 +32,11 @@
       }
 
       <!-- Mensaje de error -->
-      @if (error && !loading) {
+      @if (error() && !loading()) {
         <div class="alert alert-danger d-flex align-items-center" role="alert">
           <i class="bi bi-exclamation-triangle-fill me-2"></i>
           <div>
-            <strong>Error:</strong> {{ error }}
+            <strong>Error:</strong> {{ error() }}
             <button class="btn btn-sm btn-outline-danger ms-3" (click)="cargarCitas()">
               Reintentar
             </button>
@@ -45,10 +45,10 @@
       }
 
       <!-- Tabla de citas -->
-      @if (!loading && !error) {
+      @if (!loading() && !error()) {
         <div class="mb-3 d-flex justify-content-between align-items-center">
           <span class="badge bg-secondary">
-            Total de citas: {{ citas.length }}
+            Total de citas: {{ citas().length }}
           </span>
           <button class="btn btn-success btn-sm" (click)="cargarCitas()">
             <i class="bi bi-arrow-clockwise"></i> Actualizar
@@ -65,7 +65,7 @@
               </tr>
             </thead>
             <tbody>
-              @for (cita of citas; track cita.id) {
+              @for (cita of citas(); track cita.id) {
                 <tr>
                   <td>{{ cita.clienteNombre }}</td>
                   <td>
