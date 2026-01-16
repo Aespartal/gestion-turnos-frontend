@@ -1,42 +1,120 @@
-# gestion-turnos-front
+# 📅 Sistema de Gestión de Turnos
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.5.
+Aplicación web moderna para la gestión de citas y turnos, desarrollada con Angular 21.
 
-## Development server
+## 🚀 Características
 
-To start a local development server, run:
+- ✅ **Lista de citas** con visualización en tabla responsive
+- ✅ **Crear nuevas citas** mediante formulario validado
+- ✅ **Estados de carga** y manejo de errores
+- ✅ **UI moderna** con Bootstrap 5 y Bootstrap Icons
+- ✅ **Arquitectura limpia** con separación de modelos y servicios
+- ✅ **Componentes standalone** de Angular
+- ✅ **Tipado fuerte** con TypeScript
+- ✅ **Responsive design** para móviles y tablets
 
-```bash
-ng serve
-```
+## 📋 Requisitos Previos
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- Node.js (v18 o superior)
+- npm (v10 o superior)
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 🛠️ Instalación
 
 ```bash
-ng generate --help
+# Instalar dependencias
+npm install
 ```
 
-## Building
-
-To build the project run:
+## 🏃‍♂️ Desarrollo
 
 ```bash
-ng build
+# Iniciar servidor de desarrollo
+npm start
+# La aplicación estará disponible en http://localhost:4200
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## 🏗️ Construcción
 
-## Running unit tests
+```bash
+# Build para producción
+npm run build
+# Los archivos generados estarán en dist/
+```
+
+## 📁 Estructura del Proyecto
+
+```
+src/
+├── app/
+│   ├── components/
+│   │   ├── lista-citas/          # Componente principal de gestión
+│   │   └── formulario-cita/      # Formulario de nueva cita
+│   ├── models/
+│   │   └── cita.model.ts         # Interfaces y modelos
+│   ├── services/
+│   │   └── cita.service.ts       # Servicio HTTP para API
+│   ├── app.ts                    # Componente raíz
+│   ├── app.routes.ts             # Configuración de rutas
+│   └── app.config.ts             # Configuración de la app
+├── environments/
+│   ├── environment.ts            # Variables de desarrollo
+│   └── environment.prod.ts       # Variables de producción
+└── styles.scss                   # Estilos globales
+```
+
+## 🔧 Tecnologías Utilizadas
+
+- **Angular 21** - Framework principal
+- **TypeScript 5.9** - Lenguaje de programación
+- **Bootstrap 5.3** - Framework CSS
+- **Bootstrap Icons** - Iconografía
+- **RxJS 7.8** - Programación reactiva
+- **Vitest** - Testing
+
+## 🌐 API
+
+La aplicación se conecta a una API REST en:
+- **Desarrollo**: `http://185.253.153.171:8080/api`
+- **Producción**: Configurable en `environment.prod.ts`
+
+### Endpoints utilizados:
+
+- `GET /citas` - Lista todas las citas
+- `POST /citas` - Crea una nueva cita
+
+## 📝 Modelo de Datos
+
+```typescript
+interface Cita {
+  id: number;
+  clienteNombre: string;
+  servicio: string;
+  fechaHora: string;
+}
+```
+
+## 🎨 Servicios Disponibles
+
+- Peluquería
+- Barbería
+- Manicura
+- Pedicura
+- Tratamiento Facial
+- Masaje
+
+## 🐳 Docker
+
+La aplicación incluye configuración para Docker:
+
+```bash
+# Construir imagen
+docker build -t gestion-turnos .
+
+# Ejecutar contenedor
+docker run -p 80:80 gestion-turnos
+```
+
+## 🧪 Testing
 
 To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
 

@@ -1,0 +1,55 @@
+.card {
+  border: none;
+  border-radius: 10px;
+
+  .card-header {
+    border-radius: 10px 10px 0 0;
+    padding: 1.5rem;
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+  }
+
+  .card-body {
+    padding: 2rem;
+  }
+}
+
+.table {
+  margin-bottom: 0;
+
+  thead th {
+    font-weight: 600;
+    border-bottom: 2px solid #dee2e6;
+  }
+
+  tbody tr {
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: rgba(0, 123, 255, 0.05);
+    }
+  }
+}
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+}
+
+.badge {
+  font-size: 0.875rem;
+  padding: 0.5rem 0.75rem;
+}
+
+@media (max-width: 768px) {
+  .card-body {
+    padding: 1rem;
+  }
+
+  .table {
+    font-size: 0.875rem;
+  }
+}
