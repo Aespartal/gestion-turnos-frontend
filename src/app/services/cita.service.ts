@@ -2,6 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+export interface Cita {
+  id: number;
+  clienteNombre: string;
+  servicio: string;
+  fechaHora: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,11 +18,11 @@ export class CitasService {
 
   constructor(private http: HttpClient) { }
 
-  listarCitas(): Observable<any[]> {
-    return this.http.get<any[]>(this.API_URL);
+  listarCitas(): Observable<Cita[]> {
+    return this.http.get<Cita[]>(this.API_URL);
   }
 
-  guardarCita(cita: any): Observable<any> {
-    return this.http.post<any>(this.API_URL, cita);
+  guardarCita(cita: Omit<Cita, 'id'>): Observable<Cita> {
+    return this.http.post<Cita>(this.API_URL, cita);
   }
 }

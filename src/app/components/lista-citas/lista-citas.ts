@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CitasService } from '../../services/cita.service';
+import { CitasService, Cita } from '../../services/cita.service';
 
 @Component({
   selector: 'app-lista-citas',
@@ -10,17 +10,18 @@ import { CitasService } from '../../services/cita.service';
   styleUrls: ['./lista-citas.scss']
 })
 export class ListaCitasComponent implements OnInit {
-  citas: any[] = [];
+  citas: Cita[] = [];
 
   constructor(private citasService: CitasService) {}
 
   ngOnInit(): void {
     this.citasService.listarCitas().subscribe({
-    next: (data) => {
-      console.log("Datos recibidos:", data);
-      this.citas = [...data];
-    },
-  error: (err) => console.error("Error cargando citas:", err)
-});
+      next: (data: Cita[]) => {
+        console.log('Datos recibidos:', data);
+        this.citas = data;
+        console.log('Citas asignadas:', this.citas);
+      },
+      error: (err) => console.error('Error cargando citas:', err)
+    });
   }
 }
