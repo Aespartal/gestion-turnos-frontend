@@ -32,6 +32,6 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /root/app
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/gestion-turnos-front:latest
-            docker-compose up -d frontend
+            docker compose pull frontend
+            docker compose up -d frontend
             docker image prune -f
